@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/project
+    working_dir: /project
+    tty: true
+    stdin_open: true
+    ports:
+      - "3000:3000"

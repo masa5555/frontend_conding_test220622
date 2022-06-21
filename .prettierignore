@@ -1,0 +1,7 @@
+.nuxt/
+node_modules/
+*.json
+*.md
+*rc
+Dockerfile
+*.yml
