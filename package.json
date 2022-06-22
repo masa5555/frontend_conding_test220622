@@ -9,10 +9,13 @@
     "test": "vitest run"
   },
   "devDependencies": {
+    "@nuxtjs/composition-api": "^0.32.0",
+    "@types/axios": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
+    "axios": "^0.27.2",
     "eslint": "^8.18.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.1.1",
@@ -33,5 +36,8 @@
       "eslint --ext .ts,.vue .",
       "prettier -c -u ."
     ]
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6"
   }
 }
