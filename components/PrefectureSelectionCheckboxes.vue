@@ -25,19 +25,29 @@
   import { ref, defineProps, watch } from 'vue'
   import type {
     Prefecture,
-    UpdateSelectedPrefectures,
+    UpdatePrefectureType,
+    UpdatePrefectureFuctionType,
   } from '../types/Prefectures'
+  import { getDiffPrefecture } from '../functions/getDiffPrefecture'
+  import { getPrefNameByCode } from '../functions/getProfNameByCode'
 
-  const selected_prefectures = ref<Prefecture[]>([])
+  const selected_prefectures = ref<number[]>([])
 
   const props = defineProps<{
     prefectures: Prefecture[]
     // eslint-disable-next-line vue/prop-name-casing
-    update_selected_prefectures: UpdateSelectedPrefectures
+    update_selected_prefectures: UpdatePrefectureFuctionType
   }>()
 
-  watch(selected_prefectures, (newChecked) => {
-    props.update_selected_prefectures(newChecked)
+  watch(selected_prefectures, (newChecked, oldChecked) => {
+    console.log(selected_prefectures)
+    const { type, prefCode } = getDiffPrefecture({ newChecked, oldChecked })
+    const update_prefecture: UpdatePrefectureType = {
+      type,
+      prefCode,
+      prefName: getPrefNameByCode(prefCode, props.prefectures),
+    }
+    props.update_selected_prefectures(update_prefecture)
   })
 </script>
 

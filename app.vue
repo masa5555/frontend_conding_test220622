@@ -3,7 +3,7 @@
     <app-header />
     <prefecture-selection
       :prefectures="prefectureList"
-      :update_selected_prefectures="update_func"
+      :update_selected_prefectures="getUpdatePrefecture"
     />
     <button @click="adddata">adddata</button>
     <prefecture-chart
@@ -23,11 +23,12 @@
 
   import type {
     Prefecture,
-    UpdateSelectedPrefectures,
+    UpdatePrefectureFuctionType,
   } from './types/Prefectures'
 
   const prefectureList = ref<Prefecture[]>([])
   const update_count_key = ref(0)
+
   onMounted(async () => {
     const res_prefectureList = await axios.get(`/api/getPrefectureList`)
     prefectureList.value = res_prefectureList.data
@@ -36,29 +37,38 @@
     // console.warn(res2)
   })
 
-  const update_func: UpdateSelectedPrefectures = () =>
-    // selected_prefectures: Prefecture[]
-    {
-      // console.warn(selected_prefectures)
-    }
+  const getUpdatePrefecture: UpdatePrefectureFuctionType = (
+    update_prefecture
+  ) => {
+    console.warn(update_prefecture)
+  }
 
-  const prefectures_data = ref<Array<{ name: string; data: number[] }>>([
+  interface SelectedPrefectureDataType {
+    prefName: string
+    prefCode: number
+    data: number[]
+  }
+
+  const prefectures_data = ref<SelectedPrefectureDataType[]>([
     {
-      name: '都道府県名1',
+      prefName: '都道府県名1',
+      prefCode: 0,
       data: [
         12817, 12707, 12571, 12602, 12199, 11518, 10888, 10133, 9275, 8431,
         7610, 6816, 6048, 5324,
       ],
     },
     {
-      name: '都道府県名2',
+      prefName: '都道府県名2',
+      prefCode: 1,
       data: [111, 222, 333, 444, 555, 666, 777, 888, 999, 10000],
     },
   ])
 
   const adddata = () => {
-    const add_prefecture = {
-      name: '都道府県名3',
+    const add_prefecture: SelectedPrefectureDataType = {
+      prefName: '都道府県名3',
+      prefCode: 2,
       data: [111, 222, 333, 444, 555, 666, 777, 888, 999, 10000],
     }
     prefectures_data.value.push(add_prefecture)

@@ -12,14 +12,14 @@
   import PrefectureSelectionCheckboxes from './PrefectureSelectionCheckboxes.vue'
   import type {
     Prefecture,
-    UpdateSelectedPrefectures,
+    UpdatePrefectureFuctionType,
   } from '../types/Prefectures'
   import { defineProps } from 'vue'
 
   const props = defineProps<{
     prefectures: Prefecture[]
     // eslint-disable-next-line vue/prop-name-casing
-    update_selected_prefectures: UpdateSelectedPrefectures
+    update_selected_prefectures: UpdatePrefectureFuctionType
   }>()
 </script>
 
