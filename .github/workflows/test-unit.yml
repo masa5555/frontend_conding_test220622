@@ -1,0 +1,24 @@
+name: 'test-unit'
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+jobs:
+  test-run:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: docker-compose up
+        run: |
+          docker-compose up -d
+      - name: npm install
+        run: |
+          docker-compose exec -T node npm install
+      - name: run unit test 
+        run: |
+          docker-compose exec -T node npm run test
