@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>Index</div>
+    <app-header />
     <prefecture-selection-checkboxes
       :prefectures="test_prefectures"
       :update_selected_prefectures="update_func"
@@ -17,6 +17,7 @@
   import { onMounted, ref } from 'vue'
   // import axios from 'axios'
 
+  import AppHeader from './components/AppHeader.vue'
   import PrefectureSelectionCheckboxes from './components/PrefectureSelectionCheckboxes.vue'
   import PrefectureChart from './components/PrefectureChart.vue'
 
