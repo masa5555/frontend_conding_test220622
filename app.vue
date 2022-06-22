@@ -1,14 +1,32 @@
 <template>
-  <div>Index</div>
-  <button @click="adddata">adddata</button>
-  <prefecture-chart
-    :key="update_count_key"
-    :prefectures_data="prefectures_data"
-  />
+  <div>
+    <div>Index</div>
+    <prefecture-selection-checkboxes
+      :prefectures="test_prefectures"
+      :update_selected_prefectures="update_func"
+    />
+    <button @click="adddata">adddata</button>
+    <prefecture-chart
+      :key="update_count_key"
+      :prefectures_data="prefectures_data"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
+  import PrefectureSelectionCheckboxes from './components/PrefectureSelectionCheckboxes.vue'
   import PrefectureChart from './components/PrefectureChart.vue'
+
+  import type {
+    Prefectures,
+    UpdateSelectedPrefectures,
+  } from './types/Prefectures'
+  const test_prefectures: Prefectures = ['aaa', 'bbb', 'ccc']
+  const update_func: UpdateSelectedPrefectures = (
+    selected_prefectures: Prefectures
+  ) => {
+    console.warn(selected_prefectures)
+  }
 
   import { ref } from 'vue'
   const update_count_key = ref(0)
