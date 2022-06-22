@@ -12,9 +12,7 @@ const getPrefectureList = defineEventHandler(async () => {
     { headers: { 'X-API-KEY': API_KEY } }
   )
 
-  return {
-    data: data.result,
-  }
+  return data.result
 })
 
 export default getPrefectureList

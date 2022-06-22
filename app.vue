@@ -1,8 +1,8 @@
 <template>
   <div>
     <app-header />
-    <prefecture-selection-checkboxes
-      :prefectures="test_prefectures"
+    <prefecture-selection
+      :prefectures="prefectureList"
       :update_selected_prefectures="update_func"
     />
     <button @click="adddata">adddata</button>
@@ -15,32 +15,33 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
-  // import axios from 'axios'
+  import axios from 'axios'
 
   import AppHeader from './components/AppHeader.vue'
-  import PrefectureSelectionCheckboxes from './components/PrefectureSelectionCheckboxes.vue'
+  import PrefectureSelection from './components/PrefectureSelection.vue'
   import PrefectureChart from './components/PrefectureChart.vue'
 
   import type {
-    Prefectures,
+    Prefecture,
     UpdateSelectedPrefectures,
   } from './types/Prefectures'
 
+  const prefectureList = ref<Prefecture[]>([])
+  const update_count_key = ref(0)
   onMounted(async () => {
-    // const res1 = await axios.get(`/api/getPrefectureList`)
-    // console.warn(res1)
+    const res_prefectureList = await axios.get(`/api/getPrefectureList`)
+    prefectureList.value = res_prefectureList.data
+
     // const res2 = await axios.get(`/api/getPrefecturePopulation?prefCode=${20}`)
     // console.warn(res2)
   })
 
-  const test_prefectures: Prefectures = ['aaa', 'bbb', 'ccc']
-  const update_func: UpdateSelectedPrefectures = (
-    selected_prefectures: Prefectures
-  ) => {
-    console.warn(selected_prefectures)
-  }
+  const update_func: UpdateSelectedPrefectures = () =>
+    // selected_prefectures: Prefecture[]
+    {
+      // console.warn(selected_prefectures)
+    }
 
-  const update_count_key = ref(0)
   const prefectures_data = ref<Array<{ name: string; data: number[] }>>([
     {
       name: '都道府県名1',

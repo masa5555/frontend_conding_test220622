@@ -1,33 +1,37 @@
 <template>
   <div class="prefecture-selection-checkboxes">
     <span
-      v-for="(prefecture_name, index) in props.prefectures"
+      v-for="(prefecture, index) in props.prefectures"
       :key="index"
-      class="prefecture-selection-checkboxes-label"
+      class="prefecture-selection-checkboxes-span"
     >
       <input
-        :id="prefecture_name"
+        :id="prefecture.prefName"
         v-model="selected_prefectures"
         type="checkbox"
-        :value="prefecture_name"
+        :value="prefecture.prefCode"
+        class="prefecture-selection-checkboxes-span-checkbox"
       />
-      <label :for="prefecture_name">{{ prefecture_name }}</label>
+      <label
+        class="prefecture-selection-checkboxes-span-label"
+        :for="prefecture.prefName"
+        >{{ prefecture.prefName }}</label
+      >
     </span>
-    {{ selected_prefectures.length }}
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, defineProps, watch } from 'vue'
   import type {
-    Prefectures,
+    Prefecture,
     UpdateSelectedPrefectures,
   } from '../types/Prefectures'
 
-  const selected_prefectures = ref<Prefectures>([])
+  const selected_prefectures = ref<Prefecture[]>([])
 
   const props = defineProps<{
-    prefectures: Prefectures
+    prefectures: Prefecture[]
     // eslint-disable-next-line vue/prop-name-casing
     update_selected_prefectures: UpdateSelectedPrefectures
   }>()
@@ -38,10 +42,20 @@
 </script>
 
 <style scoped>
-  /* .prefecture-selection-checkboxes {
-  } */
+  .prefecture-selection-checkboxes {
+    border: 1px solid rgb(198, 190, 190);
+  }
 
   .prefecture-selection-checkboxes-span {
+    display: inline-block;
+    margin: 5px;
+  }
+  .prefecture-selection-checkboxes-span-checkbox {
     cursor: pointer;
+  }
+  .prefecture-selection-checkboxes-span-label {
+    margin-left: 3px;
+    cursor: pointer;
+    user-select: none;
   }
 </style>
