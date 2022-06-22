@@ -26,6 +26,7 @@
     selected_prefectures: Prefectures
   ) => {
     console.warn(selected_prefectures)
+  }
 
   import { ref } from 'vue'
   const update_count_key = ref(0)
