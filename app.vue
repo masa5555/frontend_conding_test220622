@@ -14,16 +14,8 @@
 </template>
 
 <script setup lang="ts">
-
   import { onMounted, ref } from 'vue'
   // import axios from 'axios'
-
-  onMounted(async () => {
-    // const res1 = await axios.get(`/api/getPrefectureList`)
-    // console.warn(res1)
-    // const res2 = await axios.get(`/api/getPrefecturePopulation?prefCode=${20}`)
-    // console.warn(res2)
-  })
 
   import PrefectureSelectionCheckboxes from './components/PrefectureSelectionCheckboxes.vue'
   import PrefectureChart from './components/PrefectureChart.vue'
@@ -32,6 +24,14 @@
     Prefectures,
     UpdateSelectedPrefectures,
   } from './types/Prefectures'
+
+  onMounted(async () => {
+    // const res1 = await axios.get(`/api/getPrefectureList`)
+    // console.warn(res1)
+    // const res2 = await axios.get(`/api/getPrefecturePopulation?prefCode=${20}`)
+    // console.warn(res2)
+  })
+
   const test_prefectures: Prefectures = ['aaa', 'bbb', 'ccc']
   const update_func: UpdateSelectedPrefectures = (
     selected_prefectures: Prefectures
