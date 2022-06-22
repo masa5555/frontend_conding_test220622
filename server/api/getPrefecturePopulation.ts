@@ -18,6 +18,7 @@ const getPrefecturePopulation = defineEventHandler(async (event) => {
   )
 
   return {
+    prefCode: Number(prefCode),
     data: data.result.data[0].data, //総人口
   }
 })

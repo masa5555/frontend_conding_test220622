@@ -1,5 +1,36 @@
-export type Prefectures = string[]
-export type UpdateSelectedPrefectures = {
-  // eslint-disable-next-line no-unused-vars
-  (selected_prefectures: Prefectures): void
+export type Prefecture = {
+  prefCode: number
+  prefName: string
 }
+
+// updatePrefecture
+export interface UpdatePrefectureType extends getDiffPrefectureReturnType {
+  prefName: string
+}
+export type UpdatePrefectureFuctionType = {
+  // eslint-disable-next-line no-unused-vars
+  (updatePrefecture: UpdatePrefectureType): void
+}
+
+export type PrefecturePoplationData = {
+  year: number
+  value: number
+}
+export type PrefecturePopulationResponseType = {
+  prefCode: number
+  data: PrefecturePoplationData[]
+}
+
+// getDiffPrefecture
+export type getDiffPrefectureReturnType = {
+  type: 'add' | 'delete'
+  prefCode: number
+}
+export type getDiffPrefecturePramType = {
+  newChecked: number[]
+  oldChecked: number[]
+}
+export type getDiffPrefectureType = (
+  // eslint-disable-next-line no-unused-vars
+  { newChecked, oldChecked }: getDiffPrefecturePramType
+) => getDiffPrefectureReturnType

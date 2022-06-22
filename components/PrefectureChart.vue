@@ -6,9 +6,6 @@
     :redraw-on-update="true"
     :one-to-one-update="true"
     :animate-on-update="true"
-    @rendered="onRender"
-    @update="onUpdate"
-    @destroy="onDestroy"
   />
 </template>
 
@@ -43,17 +40,17 @@
                 connectorAllowed: false,
               },
               pointInterval: 5,
-              pointStart: 1980,
+              pointStart: 1960,
             },
           },
           yAxis: {
             title: {
-              text: 'YAxis',
+              text: '総人口(人)',
             },
           },
           xAxis: {
             title: {
-              text: 'XAxis',
+              text: '年',
             },
           },
           series: this.prefectures_data,
@@ -75,17 +72,6 @@
           },
         },
       }
-    },
-    methods: {
-      onRender() {
-        console.log('Chart rendered')
-      },
-      onUpdate() {
-        console.log('Chart updated')
-      },
-      onDestroy() {
-        console.log('Chart destroyed')
-      },
     },
   }
 </script>

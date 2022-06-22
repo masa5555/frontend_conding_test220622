@@ -30,5 +30,6 @@
     "components/*.vue",
     "functions/*.ts",
     "test/*.ts",
+    "server/api/*.ts"
   ]
 }
