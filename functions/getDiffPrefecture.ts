@@ -17,7 +17,6 @@ export const getDiffPrefecture: getDiffPrefectureType = ({
     const deletePrefCode = oldChecked.find(
       (prefCode) => !newChecked.includes(prefCode)
     )
-    console.warn(deletePrefCode)
     if (!deletePrefCode) {
       throw new Error(`リロードしてください`)
     }

@@ -12,9 +12,13 @@ export type UpdatePrefectureFuctionType = {
   (updatePrefecture: UpdatePrefectureType): void
 }
 
+export type PrefecturePoplationData = {
+  year: number
+  value: number
+}
 export type PrefecturePopulationResponseType = {
   prefCode: number
-  data: number[]
+  data: PrefecturePoplationData[]
 }
 
 // getDiffPrefecture

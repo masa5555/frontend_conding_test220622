@@ -40,7 +40,6 @@
   }>()
 
   watch(selected_prefectures, (newChecked, oldChecked) => {
-    console.log(selected_prefectures)
     const { type, prefCode } = getDiffPrefecture({ newChecked, oldChecked })
     const update_prefecture: UpdatePrefectureType = {
       type,

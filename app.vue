@@ -5,10 +5,9 @@
       :prefectures="prefectureList"
       :update_selected_prefectures="getUpdatePrefecture"
     />
-    <button @click="adddata">adddata</button>
     <prefecture-chart
       :key="update_count_key"
-      :prefectures_data="prefectures_data"
+      :prefectures_data="selectedPrefecturesData"
     />
   </div>
 </template>
@@ -26,53 +25,60 @@
     UpdatePrefectureFuctionType,
   } from './types/Prefectures'
 
+  interface SelectedPrefectureDataType {
+    name: string
+    prefCode: number
+    startYear: number
+    data: number[]
+  }
+
   const prefectureList = ref<Prefecture[]>([])
   const update_count_key = ref(0)
+  const selectedPrefecturesData = ref<SelectedPrefectureDataType[]>([])
 
   onMounted(async () => {
     const res_prefectureList = await axios.get(`/api/getPrefectureList`)
     prefectureList.value = res_prefectureList.data
-
-    // const res2 = await axios.get(`/api/getPrefecturePopulation?prefCode=${20}`)
-    // console.warn(res2)
   })
 
-  const getUpdatePrefecture: UpdatePrefectureFuctionType = (
-    update_prefecture
-  ) => {
-    console.warn(update_prefecture)
-  }
+  const getUpdatePrefecture: UpdatePrefectureFuctionType = ({
+    type,
+    prefCode,
+    prefName,
+  }) => {
+    if (type === 'add') {
+      const getURL = `/api/getPrefecturePopulation?prefCode=${prefCode}`
 
-  interface SelectedPrefectureDataType {
-    prefName: string
-    prefCode: number
-    data: number[]
-  }
-
-  const prefectures_data = ref<SelectedPrefectureDataType[]>([
-    {
-      prefName: '都道府県名1',
-      prefCode: 0,
-      data: [
-        12817, 12707, 12571, 12602, 12199, 11518, 10888, 10133, 9275, 8431,
-        7610, 6816, 6048, 5324,
-      ],
-    },
-    {
-      prefName: '都道府県名2',
-      prefCode: 1,
-      data: [111, 222, 333, 444, 555, 666, 777, 888, 999, 10000],
-    },
-  ])
-
-  const adddata = () => {
-    const add_prefecture: SelectedPrefectureDataType = {
-      prefName: '都道府県名3',
-      prefCode: 2,
-      data: [111, 222, 333, 444, 555, 666, 777, 888, 999, 10000],
+      axios
+        .get(getURL)
+        .then((data) => {
+          const addPrefecture: SelectedPrefectureDataType = {
+            name: prefName,
+            prefCode: prefCode,
+            startYear: data.data[0].year,
+            data: data.data.map((v: { value: number }) => v.value),
+          }
+          selectedPrefecturesData.value.push(addPrefecture)
+          updateChart()
+        })
+        .catch((err) => {
+          throw new Error(err)
+        })
+      return
     }
-    prefectures_data.value.push(add_prefecture)
-    // 強制的にチャートコンポーネントを再描画
+    if (type === 'delete') {
+      selectedPrefecturesData.value = selectedPrefecturesData.value.filter(
+        (prefecture) => prefecture.prefCode !== prefCode
+      )
+      updateChart()
+      return
+    }
+  }
+
+  /**
+   * 強制的にチャートコンポーネントを再描画
+   */
+  const updateChart = () => {
     update_count_key.value += 1
   }
 </script>
