@@ -51,7 +51,7 @@
 
       axios
         .get(getURL)
-        .then((data) => {
+        .then(({ data }) => {
           const addPrefecture: SelectedPrefectureDataType = {
             name: prefName,
             prefCode: prefCode,
