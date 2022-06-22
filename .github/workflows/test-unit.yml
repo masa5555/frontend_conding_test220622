@@ -19,6 +19,9 @@ jobs:
       - name: npm install
         run: |
           docker-compose exec -T node npm install
+      - name: generate nuxt
+        run: |
+          docker-compose exec -T node npm run generate
       - name: run unit test 
         run: |
           docker-compose exec -T node npm run test
