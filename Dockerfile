@@ -5,3 +5,4 @@ RUN npm install
 
 WORKDIR "/project"
 EXPOSE 3000
+EXPOSE 24678

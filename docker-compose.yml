@@ -11,3 +11,4 @@ services:
     stdin_open: true
     ports:
       - "3000:3000"
+      - "24678:24678"
